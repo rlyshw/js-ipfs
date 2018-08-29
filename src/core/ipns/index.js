@@ -16,11 +16,12 @@ const path = require('./path')
 const defaultRecordTtl = 60 * 1000
 
 class IPNS {
-  constructor (routing, ipfs) {
+  constructor (routing, ipfs, pubsub) {
     this.publisher = new IpnsPublisher(routing, ipfs._repo)
     this.republisher = new IpnsRepublisher(this.publisher, ipfs)
     this.resolver = new IpnsResolver(routing, ipfs._repo)
     this.cache = new Receptacle({ max: 1000 }) // Create an LRU cache with max 1000 items
+    this.pubsub = pubsub
   }
 
   // Publish
@@ -53,7 +54,7 @@ class IPNS {
   }
 
   // Resolve
-  resolve (name, peerId, options, callback) {
+  resolve (name, options, callback) {
     // If recursive, we should not try to get the cached value
     if (!options.nocache && !options.recursive) {
       // Try to get the record from cache
@@ -67,7 +68,7 @@ class IPNS {
       }
     }
 
-    this.resolver.resolve(name, peerId, options, (err, result) => {
+    this.resolver.resolve(name, options, (err, result) => {
       if (err) {
         log.error(err)
         return callback(err)

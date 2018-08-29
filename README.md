@@ -304,6 +304,7 @@ Configure external nodes that will preload content added to this node.
 Enable and configure experimental features.
 
 - `pubsub` (boolean): Enable libp2p pub-sub. (Default: `false`)
+- `ipnsPubsub` (boolean): Enable pub-sub on IPNS. (Default: `false`)
 - `sharding` (boolean): Enable directory sharding. Directories that have many child objects will be represented by multiple DAG nodes instead of just one. It can improve lookup performance when a directory has several thousand files or more. (Default: `false`)
 - `dht` (boolean): Enable KadDHT. **This is currently not interopable with `go-ipfs`.**
 
@@ -554,6 +555,9 @@ The core API is grouped into several areas:
 - [name](https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/NAME.md)
   - [`ipfs.name.publish(value, [options], [callback])`](https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/NAME.md#namepublish)
   - [`ipfs.name.resolve(value, [options], [callback])`](https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/NAME.md#nameresolve)
+  - [`ipfs.name.pubsub.cancel(arg, [callback])`](https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/NAME.md#namepubsubcancel)
+  - [`ipfs.name.pubsub.state([callback])`](https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/NAME.md#namepubsubstate)
+  - [`ipfs.name.pubsub.subs([callback])`](https://github.com/ipfs/interface-ipfs-core/blob/master/SPEC/NAME.md#namepubsubsubs)
 
 #### Crypto and Key Management
 

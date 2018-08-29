@@ -74,10 +74,10 @@ class IpnsPublisher {
       }
 
       series([
-        (cb) => this._publishEntry(keys.ipnsKey, embedPublicKeyRecord || record, peerId, privKey, cb),
+        (cb) => this._publishEntry(keys.routingKey, embedPublicKeyRecord || record, peerId, privKey, cb),
         // Publish the public key if a public key cannot be extracted from the ID
         // We will be able to deprecate this part in the future, since the public keys will be only in the peerId
-        (cb) => embedPublicKeyRecord ? this._publishPublicKey(keys.pkKey, publicKey, peerId, privKey, cb) : cb()
+        (cb) => embedPublicKeyRecord ? this._publishPublicKey(keys.routingPubKey, publicKey, peerId, privKey, cb) : cb()
       ], (err) => {
         if (err) {
           log.error(err)
@@ -114,8 +114,8 @@ class IpnsPublisher {
         return callback(err)
       }
 
-      // TODO Routing - this should be replaced by a put to the DHT
-      this._repo.datastore.put(key, serializedRecord, (err, res) => {
+      // Add record to routing (buffer key)
+      this._routing.put(key.toBuffer(), serializedRecord, (err, res) => {
         if (err) {
           const errMsg = `ipns record for ${key.toString()} could not be stored in the routing`
 
@@ -159,8 +159,8 @@ class IpnsPublisher {
         return callback(err)
       }
 
-      // TODO Routing - this should be replaced by a put to the DHT
-      this._repo.datastore.put(key, serializedRecord, (err, res) => {
+      // Add public key to routing (buffer key)
+      this._routing.put(key.toBuffer(), serializedRecord, (err, res) => {
         if (err) {
           const errMsg = `public key for ${key.toString()} could not be stored in the routing`
 
