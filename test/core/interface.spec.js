@@ -34,9 +34,7 @@ describe('interface-ipfs-core tests', () => {
 
   tests.dag(defaultCommonFactory)
 
-  tests.dht(defaultCommonFactory, {
-    skip: { reason: 'TODO: DHT is not implemented in js-ipfs yet!' }
-  })
+  tests.dht(defaultCommonFactory)
 
   tests.files(defaultCommonFactory)
 
