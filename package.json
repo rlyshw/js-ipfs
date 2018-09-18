@@ -1,6 +1,6 @@
 {
   "name": "ipfs",
-  "version": "0.32.0",
+  "version": "0.32.1",
   "description": "JavaScript implementation of the IPFS specification",
   "leadMaintainer": "Alan Shaw <alan@tableflip.io>",
   "bin": {
@@ -33,6 +33,7 @@
     "test:node:http": "aegir test -t node -f test/http-api/index.js --timeout=10000",
     "test:node:gateway": "aegir test -t node -f test/gateway/index.js --timeout=10000",
     "test:node:cli": "aegir test -t node -f test/cli/index.js --timeout=10000",
+    "test:node:interface": "aegir test -t node -f test/core/interface.spec.js --timeout=10000",
     "test:bootstrapers": "IPFS_TEST=bootstrapers aegir test -t browser -f test/bootstrapers.js --timeout=10000",
     "benchmark": "echo \"Error: no benchmarks yet\" && exit 1",
     "benchmark:node": "echo \"Error: no benchmarks yet\" && exit 1",
@@ -182,6 +183,8 @@
     "prometheus-gc-stats": "~0.5.1"
   },
   "contributors": [
+    "0xflotus <0xflotus@gmail.com>",
+    "Alan Shaw <alan.shaw@protocol.ai>",
     "Alan Shaw <alan@tableflip.io>",
     "Alex Potsides <alex@achingbrain.net>",
     "Andrew de Andrade <andrew@deandrade.com.br>",
@@ -239,6 +242,7 @@
     "Mithgol <getgit@mithgol.ru>",
     "My9Bot <34904312+My9Bot@users.noreply.github.com>",
     "Nuno Nogueira <nunofmn@gmail.com>",
+    "Oli Evans <oli@tableflip.io>",
     "Oskar Nyberg <oskar@oskarnyberg.com>",
     "Pascal Precht <pascal.precht@googlemail.com>",
     "Pau Ramon Revilla <masylum@gmail.com>",
