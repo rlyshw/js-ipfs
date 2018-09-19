@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "ipfs": "file:../../",
-    "orbit-db": "^0.19.9"
+    "ipfs-pubsub-room": "^1.4.0",
+    "orbit-db": "^0.19.9",
+    "random-words": "^1.1.0"
   }
 }
