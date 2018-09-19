@@ -2,8 +2,15 @@
 
 const React = require('react')
 const IPFS = require('ipfs')
+const OrbitDB = require('orbit-db')
 
-const stringToUse = 'hello world from webpacked IPFS'
+const ipfsOptions = {
+  EXPERIMENTAL: {
+    pubsub: true
+  }
+}
+
+const stringToUse = 'a test, from a webpacked IPFS'
 
 class App extends React.Component {
   constructor (props) {
@@ -25,10 +32,25 @@ class App extends React.Component {
     function create () {
       // Create the IPFS node instance
 
-      node = new IPFS({ repo: String(Math.random() + Date.now()) })
+      //node = new IPFS({ repo: String(Math.random() + Date.now()) })
+      node = new IPFS(ipfsOptions)
 
-      node.once('ready', () => {
+      node.once('ready', async () => {
         console.log('IPFS node is ready')
+        const orbitdb = new OrbitDB(node)
+        const db = await orbitdb.log('hello')
+        db.events.on('ready',(dbname,heads)=>{
+          console.log(dbname,heads)
+        })
+        db.events.on('replicated',(addr)=>{
+          console.log(db.iterator({limit: -1}).collect())
+        })
+        await db.load()
+        const hash = await db.add('world')
+        console.log(hash)
+
+        const result = db.iterator({limit:-1}).collect()
+        console.log(JSON.stringify(result, null, 2))
         ops()
       })
     }

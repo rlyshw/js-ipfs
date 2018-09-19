@@ -20,6 +20,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "ipfs": "file:../../"
+    "ipfs": "file:../../",
+    "orbit-db": "^0.19.9"
   }
 }
